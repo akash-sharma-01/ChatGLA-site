@@ -2,86 +2,62 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ChatGLA</title>
-  <link rel="icon" href="https://www.gla.ac.in/images/logo.png" type="image/png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Welcome to GLA University</title>
   <style>
     body {
-      margin: 0;
       font-family: Arial, sans-serif;
-      background-color: #ffffff;
-      color: #006937;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      background-image: url('https://www.gla.ac.in/images/slider/slider8.jpg');
+      margin: 0;
+      background-image: url('https://www.gla.ac.in/images/gallery/17.jpg');
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
-      min-height: 100vh;
+      background-attachment: fixed;
+      background-color: #ffffff;
+      color: #006937;
     }
-
     header {
       background-color: #ffffffcc;
-      width: 100%;
+      padding: 20px;
       text-align: center;
-      padding: 1rem 0;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      border-bottom: 2px solid #006937;
     }
-
     header img {
-      height: 70px;
+      height: 80px;
     }
-
-    .welcome {
-      margin: 1rem 0 0.5rem;
-      font-size: 1.5rem;
-      font-weight: bold;
-      color: #006937;
+    header h1 {
+      margin: 10px 0 5px;
+      font-size: 2.5rem;
     }
-
-    .subtitle {
-      font-size: 1rem;
-      color: #006937;
-      background-color: #ffffffdd;
-      padding: 0.5rem 1rem;
-      border-radius: 8px;
+    header p {
+      font-size: 1.2rem;
     }
-
-    .chat-container {
-      background-color: #ffffffee;
-      border: 2px solid #006937;
-      border-radius: 12px;
-      padding: 1rem;
-      margin: 2rem 0;
-      width: 90%;
-      max-width: 800px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-    }
-
     #webchat {
       height: 600px;
-      width: 100%;
+      width: 80%;
+      max-width: 900px;
+      margin: 30px auto;
+      background: #ffffffcc;
+      border: 2px solid #006937;
+      border-radius: 10px;
+      overflow: hidden;
     }
   </style>
-  <script src="https://cdn.botframework.com/botframework-webchat/latest/webchat.js"></script>
 </head>
 <body>
   <header>
     <img src="https://www.gla.ac.in/images/logo.png" alt="GLA University Logo">
+    <h1>Welcome to GLA University</h1>
+    <p>Radhe Radhe 🙏</p>
+    <p>I'm your virtual assistant. Ask me questions related to college admission, fee structure, and more.</p>
   </header>
 
-  <div class="welcome">Radhe Radhe 🙏</div>
-  <div class="welcome">Welcome to GLA University</div>
-  <div class="subtitle">I'm a virtual assistant. Ask me questions related to college admission, fee structure, campus facilities etc.</div>
+  <div id="webchat"></div>
 
-  <div class="chat-container">
-    <div id="webchat" role="main"></div>
-  </div>
-
+  <script src="https://cdn.botframework.com/botframework-webchat/latest/webchat.js"></script>
   <script>
     const directLine = window.WebChat.createDirectLine({
-      secret: Ck1otWQYTGhqAqjoW7rgA3MjJvcqiaqdwaOx2RxC8PWkiq58mLwfJQQJ99BGAC4f1cMAArohAAABAZBS4ZOE.FTF95ZkxolxHg1JWPV1XLDOJvzXOn24RK3cWsqjpCZIs85z69HTDJQQJ99BGAC4f1cMAArohAAABAZBS3yxH
+      secret: 'Ck1otWQYTGhqAqjoW7rgA3MjJvcqiaqdwaOx2RxC8PWkiq58mLwfJQQJ99BGAC4f1cMAArohAAABAZBS4ZOE.FTF95ZkxolxHg1JWPV1XLDOJvzXOn24RK3cWsqjpCZIs85z69HTDJQQJ99BGAC4f1cMAArohAAABAZBS3yxH'
     });
 
     window.WebChat.renderWebChat({
@@ -94,7 +70,9 @@
         bubbleBackground: '#e6ffe6',
         bubbleFromUserBackground: '#ccffcc',
         botAvatarBackgroundColor: '#006937',
-        userAvatarBackgroundColor: '#ffffff'
+        userAvatarBackgroundColor: '#ffffff',
+        hideUploadButton: true,
+        enableSpeech: false
       }
     }, document.getElementById('webchat'));
   </script>
