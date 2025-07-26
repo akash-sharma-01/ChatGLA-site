@@ -4,117 +4,38 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Welcome to GLA University</title>
+  <script src="https://cdn.jsdelivr.net/npm/@azure/openai-assistants-web@1.0.0/dist/azure-openai-assistants-web.min.js"></script>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
+    body { font-family: Arial, sans-serif; margin:0;
       background-image: url('https://www.gla.ac.in/images/gallery/17.jpg');
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      background-attachment: fixed;
-      background-color: #ffffff;
-      color: #006937;
+      background-size:cover; background-position:center; color:#006937;
     }
-    header {
-      background-color: #ffffffcc;
-      padding: 20px;
-      text-align: center;
-      border-bottom: 2px solid #006937;
+    header { background: #ffffffcc; padding:20px; text-align:center; border-bottom:2px solid #006937; }
+    header img { height:80px; }
+    header h1 { margin:10px 0; font-size:2.5rem; }
+    header p { font-size:1.2rem; }
+    #chat-container {
+      width:90%; max-width:800px; margin:2rem auto;
+      background: #ffffffcc; border:2px solid #006937;
+      border-radius:12px; padding:1rem;
     }
-    header img {
-      height: 80px;
-    }
-    header h1 {
-      margin: 10px 0 5px;
-      font-size: 2.5rem;
-    }
-    header p {
-      font-size: 1.2rem;
-    }
-    #chatbox {
-      height: 600px;
-      width: 80%;
-      max-width: 900px;
-      margin: 30px auto;
-      background: #ffffffcc;
-      border: 2px solid #006937;
-      border-radius: 10px;
-      overflow-y: auto;
-      padding: 20px;
-    }
-    input[type="text"] {
-      width: 70%;
-      padding: 10px;
-      font-size: 16px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-    }
-    button {
-      padding: 10px 20px;
-      font-size: 16px;
-      margin-left: 10px;
-      background-color: #006937;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-    .message {
-      margin-bottom: 10px;
-    }
-    .user { font-weight: bold; }
-    .bot { color: #333; }
   </style>
 </head>
 <body>
   <header>
-    <img src="https://www.gla.ac.in/images/logo.png" alt="GLA University Logo">
+    <img src="https://www.gla.ac.in/images/logo.png" alt="GLA Logo" />
     <h1>Welcome to GLA University</h1>
     <p>Radhe Radhe 🙏</p>
-    <p>I'm your virtual assistant. Ask me questions related to college admission, fee structure, and more.</p>
+    <p>I'm your virtual assistant. Ask me about admissions, fees, hostels, and more.</p>
   </header>
 
-  <div id="chatbox"></div>
-  <div style="text-align: center; margin-bottom: 30px">
-    <input type="text" id="user-input" placeholder="Type your question here...">
-    <button onclick="sendMessage()">Send</button>
+  <div id="chat-container">
+    <openai-assistants-chat
+      assistant-id="asst_RhpkXQJV3Bpx4TH9m3cXysQV"
+      azure-endpoint="https://chatt-gla.cognitiveservices.azure.com/"
+      api-key="G4KRja7PBSN251BgJg5ubNFvp60j0SHK6fAg8vy6ytz364KBL7QeJQQJ99BGACHYHv6XJ3w3AAAAACOGI4BJ"
+      theme="light">
+    </openai-assistants-chat>
   </div>
-
-  <script>
-    async function sendMessage() {
-      const input = document.getElementById("user-input");
-      const chatbox = document.getElementById("chatbox");
-      const userMessage = input.value.trim();
-      if (!userMessage) return;
-
-      const userDiv = document.createElement("div");
-      userDiv.className = "message user";
-      userDiv.textContent = "You: " + userMessage;
-      chatbox.appendChild(userDiv);
-      input.value = "";
-
-      try {
-        const response = await fetch("https://chat-gla-function-f6aheegdfwdggdc6.eastus2-01.azurewebsites.net/api/Chat-GLA1?code=osRcoSZ9TcFxjKN_6Koae4KOimd7cPnB-8QThWAyv6R-AzFuv3eI3Q==", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify({ user_input: userMessage })
-        });
-
-        const data = await response.json();
-        const botDiv = document.createElement("div");
-        botDiv.className = "message bot";
-        botDiv.textContent = "Assistant: " + (data.reply || "No response");
-        chatbox.appendChild(botDiv);
-      } catch (error) {
-        const errorDiv = document.createElement("div");
-        errorDiv.className = "message bot";
-        errorDiv.textContent = "Assistant: Error fetching response.";
-        chatbox.appendChild(errorDiv);
-      }
-    }
-  </script>
 </body>
 </html>
